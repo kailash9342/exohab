@@ -21,8 +21,19 @@ All notable changes to this project are documented here. The format follows
 - `split_normal_cdf` and a `lower` bound argument for `sample_split_normal`.
 - `plot_habitable_zone`: effective temperature vs. insolation diagram with the
   Kopparapu et al. (2014) conservative and optimistic habitable zones.
-- README with formulas, limitations and references; `CITATION.cff`;
-  GitHub Actions workflows for tests and PyPI publishing.
+- README with quick starts for students, researchers and ML engineers, plus
+  formulas, limitations and references; `CITATION.cff`.
+- `examples/quickstart.ipynb`: an executed walkthrough with live NASA data,
+  Monte Carlo and plots.
+- GitHub Actions: `ci.yml` (pytest on Ubuntu with Python 3.10–3.12, a
+  core-only install, and a build with `twine check`) and `publish.yml` (PyPI
+  trusted publishing).
+- `tests/test_docs.py`: checks that every `exohab` call in the README and the
+  notebook uses functions and parameters that exist.
+
+### Packaging
+- License metadata now uses the PEP 639 form: `license = "MIT"` with
+  `license-files`.
 
 ### Changed
 - `plot_esi_scatter` now stacks the candidate labels in a column with leader
