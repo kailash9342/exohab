@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "exohab"
+version = "0.1.0"
+description = "Fetch live exoplanet data, compute habitability metrics (ESI, PHI, BCI, Kopparapu HZ), propagate measurement uncertainties and plot results."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Your Name" }]
+keywords = [
+    "exoplanets",
+    "astrobiology",
+    "habitability",
+    "earth similarity index",
+    "nasa exoplanet archive",
+    "monte carlo",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = [
+    "numpy>=1.23",
+    "pandas>=1.5",
+    "scipy>=1.9",
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+viz = ["matplotlib>=3.6"]
+ml = ["scikit-learn>=1.2"]
+all = ["matplotlib>=3.6", "scikit-learn>=1.2"]
+dev = ["pytest>=7.0", "build>=1.0", "twine>=4.0"]
+
+[project.urls]
+Homepage = "https://github.com/your-name/exohab"
+Issues = "https://github.com/your-name/exohab/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/exohab"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/exohab", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = ["error::DeprecationWarning:exohab.*"]
