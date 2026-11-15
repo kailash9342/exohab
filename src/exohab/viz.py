@@ -12,9 +12,10 @@ from typing import Any, Optional
 import numpy as np
 import pandas as pd
 
+from .habitable_zone import TEFF_RANGE, kopparapu_seff
 from .uncertainty import MCResult
 
-__all__ = ["plot_esi_scatter", "plot_mc_distribution"]
+__all__ = ["plot_esi_scatter", "plot_mc_distribution", "plot_habitable_zone"]
 
 
 def _pyplot() -> Any:
@@ -25,6 +26,39 @@ def _pyplot() -> Any:
             "exohab plotting requires matplotlib. Install it with: pip install exohab[all]"
         ) from exc
     return plt
+
+
+def _label_points(
+    ax: Any, x: np.ndarray, y: np.ndarray, labels: list, min_sep: float = 0.045
+) -> None:
+    """Label points in a stacked column with leader lines so labels never overlap.
+
+    Labels are placed (in data coordinates of a [0, 1] axis) in a column to the
+    left of the left-most labelled point, ordered by y and spaced at least
+    ``min_sep`` apart.
+    """
+    if len(labels) == 0:
+        return
+    order = np.argsort(-y)
+    x_text = max(0.02, float(np.min(x)) - 0.33)
+    placed: list = []
+    for i in order:
+        target = min(float(y[i]), 1.0) if not placed else min(float(y[i]), placed[-1] - min_sep)
+        placed.append(target)
+    # shift the whole column up if it ran below the axis
+    shift = max(0.0, 0.03 - placed[-1])
+    for i, yt in zip(order, placed):
+        ax.annotate(
+            labels[i],
+            xy=(x[i], y[i]),
+            xytext=(x_text, yt + shift),
+            textcoords="data",
+            fontsize=7,
+            ha="left",
+            va="center",
+            bbox={"boxstyle": "round,pad=0.15", "fc": "white", "ec": "none", "alpha": 0.8},
+            arrowprops={"arrowstyle": "-", "color": "0.5", "lw": 0.6},
+        )
 
 
 def plot_esi_scatter(
@@ -105,9 +139,12 @@ def plot_esi_scatter(
 
     if top_n and name_col and name_col in data.columns:
         top = data.nlargest(int(top_n), esi_col)
-        for _, row in top.iterrows():
-            ax.annotate(str(row[name_col]), (row[interior_col], row[surface_col]),
-                        xytext=(3, 3), textcoords="offset points", fontsize=7)
+        _label_points(
+            ax,
+            top[interior_col].to_numpy(float),
+            top[surface_col].to_numpy(float),
+            top[name_col].astype(str).tolist(),
+        )
 
     ax.set_xlim(0, 1.05)
     ax.set_ylim(0, 1.05)
@@ -156,4 +193,84 @@ def plot_mc_distribution(
     ax.set_ylabel("Probability density")
     ax.set_title(f"Monte Carlo distribution (n = {result.n_valid})")
     ax.legend(fontsize=8)
+    return ax
+
+
+def plot_habitable_zone(
+    df: pd.DataFrame,
+    flux_col: str = "pl_insol",
+    teff_col: str = "st_teff",
+    name_col: Optional[str] = "pl_name",
+    labels: Optional[list] = None,
+    color_col: Optional[str] = None,
+    ax: Optional[Any] = None,
+) -> Any:
+    """Stellar effective temperature vs. insolation with Kopparapu (2014) HZ bands.
+
+    The conservative habitable zone (runaway to maximum greenhouse) is shaded
+    dark green and the optimistic one (recent Venus to early Mars) light green,
+    over the 2600-7200 K range where the fits are valid. The insolation axis is
+    logarithmic and inverted (hot planets on the left), as in Kopparapu et al.
+    (2013, 2014).
+
+    Parameters
+    ----------
+    df : DataFrame
+        Table with insolation (Earth units) and stellar effective temperature.
+    flux_col, teff_col : str
+        Column names.
+    name_col : str, optional
+        Column holding planet names, used with ``labels``.
+    labels : list of str, optional
+        Planet names to annotate.
+    color_col : str, optional
+        Column used to colour the points (e.g. ``"esi_2p"``).
+    ax : matplotlib Axes, optional
+        Axes to draw on.
+
+    Returns
+    -------
+    matplotlib.axes.Axes
+    """
+    plt = _pyplot()
+    for c in (flux_col, teff_col):
+        if c not in df.columns:
+            raise KeyError(f"column '{c}' not found")
+    if ax is None:
+        _, ax = plt.subplots(figsize=(7, 5.5))
+
+    teff = np.linspace(TEFF_RANGE[0], TEFF_RANGE[1], 200)
+    ax.fill_betweenx(teff, kopparapu_seff(teff, "recent_venus"), kopparapu_seff(teff, "early_mars"),
+                     color="tab:green", alpha=0.15, lw=0, label="Optimistic HZ")
+    ax.fill_betweenx(teff, kopparapu_seff(teff, "runaway_greenhouse"),
+                     kopparapu_seff(teff, "maximum_greenhouse"),
+                     color="tab:green", alpha=0.35, lw=0, label="Conservative HZ")
+
+    data = df.copy()
+    data[flux_col] = pd.to_numeric(data[flux_col], errors="coerce")
+    data[teff_col] = pd.to_numeric(data[teff_col], errors="coerce")
+    data = data[(data[flux_col] > 0) & data[teff_col].notna()]
+    kwargs: dict = {"s": 12, "alpha": 0.8, "edgecolors": "none"}
+    if color_col and color_col in data.columns:
+        sc = ax.scatter(data[flux_col], data[teff_col], c=data[color_col], cmap="viridis",
+                        vmin=0, vmax=1, **kwargs)
+        ax.figure.colorbar(sc, ax=ax, label=color_col)
+    else:
+        ax.scatter(data[flux_col], data[teff_col], color="0.3", **kwargs)
+    ax.scatter([1.0], [5772.0], marker="*", s=150, color="tab:blue", zorder=3, label="Earth")
+
+    if labels and name_col and name_col in data.columns:
+        for _, row in data[data[name_col].isin(labels)].iterrows():
+            ax.annotate(str(row[name_col]), (row[flux_col], row[teff_col]),
+                        xytext=(4, 4), textcoords="offset points", fontsize=7)
+
+    ax.set_xscale("log")
+    lo = float(np.nanmin(data[flux_col])) if len(data) else 0.1
+    hi = float(np.nanmax(data[flux_col])) if len(data) else 10.0
+    ax.set_xlim(max(hi, 3.0) * 1.2, min(lo, 0.2) / 1.2)  # inverted: hot on the left
+    ax.set_ylim(2400, 7400)
+    ax.set_xlabel("Insolation (Earth = 1)")
+    ax.set_ylabel("Stellar effective temperature (K)")
+    ax.set_title("Habitable zone (Kopparapu et al. 2014)")
+    ax.legend(loc="upper right", fontsize=8)
     return ax

@@ -145,7 +145,7 @@ class TestViz:
 
 # --------------------------------------------------------------------------- imports
 def test_version_and_exports():
-    assert exohab.__version__ == "0.1.0"
+    assert isinstance(exohab.__version__, str)
     for name in exohab.__all__:
         assert hasattr(exohab, name), name
     with pytest.raises(AttributeError):

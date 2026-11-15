@@ -32,6 +32,7 @@ from .metrics import (
     compute_esi_4p,
     density_from_mass_radius,
     escape_velocity_from_mass_radius,
+    estimate_surface_temp,
 )
 
 __all__ = [
@@ -116,6 +117,7 @@ def add_habitability_columns(
     density_col: Optional[str] = "pl_dens",
     flux_col: str = "pl_insol",
     surface_temp_col: str = "pl_eqt",
+    surface_temp_method: Optional[str] = None,
 ) -> pd.DataFrame:
     """Append derived Earth-unit properties and ESI columns.
 
@@ -127,14 +129,20 @@ def add_habitability_columns(
       and density exist, ``R * sqrt(rho_eu)`` (same physics: ``M = rho R^3``).
     * ``esi_2p`` - radius + insolation ESI (:func:`exohab.compute_esi_2p`).
     * ``esi_4p_interior``, ``esi_4p_surface``, ``esi_4p`` - 4-parameter ESI.
+    * ``surface_temp_est`` - only when ``surface_temp_method`` is given.
+
+    The temperature used for the 4-parameter ESI is recorded in
+    ``out.attrs["esi_4p_temperature"]``.
 
     .. warning::
        Exoplanet catalogues list *equilibrium* temperature, not surface
-       temperature. By default ``pl_eqt`` is used as the temperature input of
-       the 4-parameter ESI, without any greenhouse correction, against the
-       288 K reference. This is a proxy and systematically lowers the surface
-       ESI of temperate planets (Earth: T_eq ~ 255 K). Supply a column of
-       modelled surface temperatures via ``surface_temp_col`` if available.
+       temperature. By default (``surface_temp_method=None``) ``pl_eqt`` is
+       used directly against the 288 K reference. This is a proxy and
+       systematically lowers the surface ESI of temperate planets (Earth:
+       T_eq ~ 255 K). Pass ``surface_temp_method="kashyap2017"`` to convert it
+       first with :func:`exohab.estimate_surface_temp` (rocky planets with
+       atmospheres only), or point ``surface_temp_col`` at modelled surface
+       temperatures.
 
     Parameters
     ----------
@@ -142,6 +150,9 @@ def add_habitability_columns(
         Input table (not modified).
     radius_col, mass_col, density_col, flux_col, surface_temp_col : str
         Column names to use.
+    surface_temp_method : str, optional
+        If given, ``surface_temp_col`` is treated as equilibrium temperature
+        and converted with :func:`exohab.estimate_surface_temp`.
 
     Returns
     -------
@@ -170,6 +181,14 @@ def add_habitability_columns(
     out["density_eu"] = density.astype(float)
     out["escape_velocity_eu"] = vesc.astype(float)
     out["esi_2p"] = compute_esi_2p(r, flux)
+    if surface_temp_method is not None:
+        temp = estimate_surface_temp(temp, surface_temp_method)
+        out["surface_temp_est"] = temp
+        out.attrs["esi_4p_temperature"] = (
+            f"surface temperature estimated from '{surface_temp_col}' ({surface_temp_method})"
+        )
+    else:
+        out.attrs["esi_4p_temperature"] = f"'{surface_temp_col}' used as surface temperature"
     res = compute_esi_4p(r, out["density_eu"], out["escape_velocity_eu"], temp)
     out["esi_4p_interior"] = res.interior
     out["esi_4p_surface"] = res.surface
@@ -202,6 +221,7 @@ def load_nasa_exoplanets(
     timeout: float = 120.0,
     add_metrics: bool = True,
     session: Optional[requests.Session] = None,
+    surface_temp_method: Optional[str] = None,
 ) -> pd.DataFrame:
     """Load confirmed exoplanets from the NASA Exoplanet Archive.
 
@@ -230,6 +250,9 @@ def load_nasa_exoplanets(
         Append derived columns via :func:`add_habitability_columns`.
     session : requests.Session, optional
         Session to use for the HTTP request.
+    surface_temp_method : str, optional
+        Passed to :func:`add_habitability_columns`; e.g. ``"kashyap2017"`` to
+        estimate surface temperature from ``pl_eqt`` for the 4-parameter ESI.
 
     Returns
     -------
@@ -273,4 +296,6 @@ def load_nasa_exoplanets(
             tmp.replace(path)
 
     df = pd.read_csv(io.StringIO(text))
-    return add_habitability_columns(df) if add_metrics else df
+    if not add_metrics:
+        return df
+    return add_habitability_columns(df, surface_temp_method=surface_temp_method)

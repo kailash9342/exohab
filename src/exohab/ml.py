@@ -84,6 +84,10 @@ class HabitabilityFeatureTransformer(TransformerMixin, BaseEstimator):  # type: 
         ``luminosity_col`` holds log10(L/L_sun) (as ``st_lum`` does).
     keep_original : bool, default False
         If True, return the input columns followed by the new features.
+    surface_temp_method : str, optional
+        e.g. ``"kashyap2017"`` to convert equilibrium to surface temperature
+        before computing the 4-parameter ESI (see
+        :func:`exohab.estimate_surface_temp`).
 
     Notes
     -----
@@ -102,6 +106,7 @@ class HabitabilityFeatureTransformer(TransformerMixin, BaseEstimator):  # type: 
         luminosity_col: str = "st_lum",
         luminosity_is_log: bool = True,
         keep_original: bool = False,
+        surface_temp_method: Optional[str] = None,
     ) -> None:
         _require_sklearn()
         self.radius_col = radius_col
@@ -113,6 +118,7 @@ class HabitabilityFeatureTransformer(TransformerMixin, BaseEstimator):  # type: 
         self.luminosity_col = luminosity_col
         self.luminosity_is_log = luminosity_is_log
         self.keep_original = keep_original
+        self.surface_temp_method = surface_temp_method
 
     def _check_X(self, X: Any) -> pd.DataFrame:
         if not isinstance(X, pd.DataFrame):
@@ -142,6 +148,7 @@ class HabitabilityFeatureTransformer(TransformerMixin, BaseEstimator):  # type: 
             density_col=self.density_col,
             flux_col=self.flux_col,
             surface_temp_col=self.surface_temp_col,
+            surface_temp_method=self.surface_temp_method,
         )
 
         def col(name: str) -> pd.Series:

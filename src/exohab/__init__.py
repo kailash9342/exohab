@@ -20,17 +20,27 @@ from .metrics import (
     compute_esi_4p,
     compute_phi,
     compute_similarity,
+    SURFACE_TEMP_METHODS,
     density_from_mass_radius,
     escape_velocity_from_mass_radius,
+    estimate_surface_temp,
 )
-from .uncertainty import MCResult, compute_esi_2p_mc, compute_esi_mc, sample_split_normal
+from .uncertainty import (
+    MCResult,
+    compute_esi_2p_mc,
+    compute_esi_mc,
+    compute_esi_mc_catalog,
+    sample_split_normal,
+    split_normal_cdf,
+)
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 _LAZY = {
     "HabitabilityFeatureTransformer": "ml",
     "plot_esi_scatter": "viz",
     "plot_mc_distribution": "viz",
+    "plot_habitable_zone": "viz",
 }
 
 __all__ = [
@@ -47,11 +57,15 @@ __all__ = [
     "compute_bci",
     "density_from_mass_radius",
     "escape_velocity_from_mass_radius",
+    "estimate_surface_temp",
+    "SURFACE_TEMP_METHODS",
     "kopparapu_seff",
     "hz_distance",
     "compute_esi_mc",
     "compute_esi_2p_mc",
+    "compute_esi_mc_catalog",
     "sample_split_normal",
+    "split_normal_cdf",
     "load_nasa_exoplanets",
     "add_habitability_columns",
     *_LAZY,

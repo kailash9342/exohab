@@ -51,6 +51,8 @@ __all__ = [
     "compute_similarity",
     "compute_phi",
     "compute_bci",
+    "SURFACE_TEMP_METHODS",
+    "estimate_surface_temp",
 ]
 
 # ---------------------------------------------------------------------------
@@ -211,6 +213,64 @@ def escape_velocity_from_mass_radius(mass: ArrayLike, radius: ArrayLike) -> Any:
         valid = np.isfinite(m) & np.isfinite(r) & (m >= 0) & (r > 0)
         out = np.where(valid, np.sqrt(np.where(valid, m / r, np.nan)), np.nan)
     return restore(out, idx, "escape_velocity_eu")
+
+
+# ---------------------------------------------------------------------------
+# Surface temperature from equilibrium temperature
+# ---------------------------------------------------------------------------
+SURFACE_TEMP_METHODS: Dict[str, str] = {
+    "kashyap2017": (
+        "T_s = 9.650 + 1.096 * T_eq (K); least-squares fit to Solar System bodies "
+        "with a rocky surface and an atmosphere, Kashyap Jagadeesh (2017), eq. 3.12."
+    ),
+}
+"""Available methods for :func:`estimate_surface_temp`."""
+
+
+def estimate_surface_temp(teq: ArrayLike, method: str = "kashyap2017") -> Any:
+    """Estimate mean surface temperature from equilibrium temperature.
+
+    Exoplanet catalogues list the equilibrium temperature ``T_eq``, but the
+    4-parameter ESI is defined with the mean *surface* temperature (Earth:
+    T_eq ~ 255 K, T_s = 288 K).
+
+    ``method="kashyap2017"`` uses the linear relation [K17]_ (eq. 3.12)::
+
+        T_s = 9.650 + 1.096 * T_eq
+
+    fitted to Earth, Mars, the Moon, Titan and Triton (T_eq ~ 34-255 K);
+    Venus, with its runaway greenhouse, was excluded from the fit. With the
+    published (rounded) coefficients it gives 289.1 K for Earth
+    (T_eq = 255 K) and 247.5 K for Mars (T_eq = 217 K); the source's Table 3.3
+    lists 289.28 K and 247.61 K, the small difference coming from coefficient
+    rounding.
+
+    .. warning::
+       The relation is empirical, rests on five bodies, and only applies to
+       rocky planets with an atmosphere. It is not meaningful for gas giants,
+       and is an extrapolation for T_eq above ~255 K.
+
+    Parameters
+    ----------
+    teq : array-like
+        Equilibrium temperature in K.
+    method : str, default "kashyap2017"
+        Key of :data:`SURFACE_TEMP_METHODS`.
+
+    Returns
+    -------
+    float, ndarray or Series
+        Estimated surface temperature in K; NaN for non-positive or missing
+        ``teq``.
+    """
+    if method not in SURFACE_TEMP_METHODS:
+        raise KeyError(f"Unknown method '{method}'. Choose from {sorted(SURFACE_TEMP_METHODS)}")
+    idx = series_index(teq)
+    t = to_array(teq)
+    with np.errstate(invalid="ignore"):
+        valid = np.isfinite(t) & (t > 0)
+        ts = 9.650 + 1.096 * t
+    return restore(np.where(valid, ts, np.nan), idx, "surface_temp_est")
 
 
 # ---------------------------------------------------------------------------
