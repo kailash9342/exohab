@@ -9,7 +9,7 @@ description = "Fetch live exoplanet data, compute habitability metrics (ESI, PHI
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "Your Name" }]
+authors = [{ name = "Kailash Sivagnanam" }]
 keywords = [
     "exoplanets",
     "astrobiology",

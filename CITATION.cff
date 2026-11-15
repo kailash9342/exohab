@@ -6,8 +6,8 @@ version: 0.2.0
 date-released: 2026-11-15
 license: MIT
 authors:
-  - family-names: "Name"
-    given-names: "Your"
+  - family-names: "Sivagnanam"
+    given-names: "Kailash"
 repository-code: "https://github.com/your-name/exohab"
 keywords:
   - exoplanets
