@@ -2,8 +2,9 @@
 title: About exohab and its author
 description: >-
   About exohab, the open-source Python exoplanet habitability toolkit, and its
-  creator and maintainer Kailash Sivagnanam: mission, principles,
-  acknowledgements and how to contribute.
+  creator Kailash Sivagnanam, Founder & CEO of Hacroo Technologies and AI &
+  Data Science graduate from Panruti, Tamil Nadu: mission, principles and
+  acknowledgements.
 ---
 
 # About exohab
@@ -59,19 +60,33 @@ of the boilerplate.
 
 <div class="hx-author" markdown>
 
-![Kailash Sivagnanam](https://github.com/kailash9342.png?size=216){ width="108" height="108" }
+![Kailash Sivagnanam, founder and CEO of Hacroo Technologies and creator of exohab](assets/img/kailash-sivagnanam.jpg){ width="132" height="132" }
 
 <div markdown>
 
 ### Kailash Sivagnanam
 
-<p class="hx-role">Creator and maintainer of exohab</p>
+<p class="hx-role">Founder &amp; CEO, Hacroo Technologies · Creator of exohab</p>
 
-Kailash designed and maintains exohab, from the habitability metrics and the
-uncertainty modelling to the NASA data pipeline, the tests and this website.
+:material-school: Graduate in Artificial Intelligence & Data Science &nbsp;·&nbsp; :material-map-marker: Panruti, Tamil Nadu, India
+{ .hx-meta }
 
+Kailash Sivagnanam is the founder and CEO of
+[Hacroo Technologies](https://hacroo.com/) and a graduate in Artificial
+Intelligence & Data Science, with a passion for astronomy and space
+technology. Kailash created exohab to bring those interests together: rigorous,
+openly cited science and modern data tools that make exoplanet habitability
+research accessible to students, data scientists and researchers. Kailash
+designs and maintains every part of the project, from the habitability
+metrics and uncertainty modelling to the NASA data pipeline, the tests and
+this website.
+
+<div class="hx-author-links" markdown>
+[:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/kailash-sivaganam-49a383315){ .md-button }
 [:fontawesome-brands-github: GitHub](https://github.com/kailash9342){ .md-button }
+[:material-web: hacroo.com](https://hacroo.com/){ .md-button }
 [:fontawesome-brands-python: PyPI](https://pypi.org/user/kailash-sivagnanam/){ .md-button }
+</div>
 
 </div>
 </div>

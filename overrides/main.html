@@ -31,7 +31,7 @@
     "programmingLanguage": "Python",
     "license": "https://opensource.org/licenses/MIT",
     "identifier": "https://doi.org/10.5281/zenodo.24269967",
-    "author": {"@type": "Person", "name": "Kailash Sivagnanam", "url": "https://github.com/kailash9342"},
+    "author": {"@type": "Person", "@id": "{{ config.site_url }}about/#kailash-sivagnanam", "name": "Kailash Sivagnanam", "url": "{{ config.site_url }}about/", "jobTitle": "Founder & CEO, Hacroo Technologies", "sameAs": ["https://www.linkedin.com/in/kailash-sivaganam-49a383315", "https://github.com/kailash9342", "https://hacroo.com/"]},
     "keywords": "exoplanets, astrobiology, habitability, Earth Similarity Index, habitable zone, NASA Exoplanet Archive, Monte Carlo, Python",
     "runtimePlatform": "Python 3.10+"
   }
@@ -45,15 +45,22 @@
     "url": "{{ page.canonical_url }}",
     "mainEntity": {
       "@type": "Person",
+      "@id": "{{ config.site_url }}about/#kailash-sivagnanam",
       "name": "Kailash Sivagnanam",
-      "url": "https://github.com/kailash9342",
-      "image": "https://github.com/kailash9342.png",
-      "jobTitle": "Creator and maintainer of exohab",
+      "url": "{{ page.canonical_url }}",
+      "image": "{{ config.site_url }}assets/img/kailash-sivagnanam.jpg",
+      "jobTitle": "Founder & CEO",
+      "description": "Founder and CEO of Hacroo Technologies, graduate in Artificial Intelligence & Data Science, and creator of exohab, an open-source Python toolkit for exoplanet habitability.",
+      "worksFor": {"@type": "Organization", "name": "Hacroo Technologies", "url": "https://hacroo.com/"},
+      "hasCredential": {"@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "Artificial Intelligence and Data Science"},
+      "address": {"@type": "PostalAddress", "addressLocality": "Panruti", "addressRegion": "Tamil Nadu", "addressCountry": "IN"},
       "sameAs": [
+        "https://www.linkedin.com/in/kailash-sivaganam-49a383315",
         "https://github.com/kailash9342",
+        "https://hacroo.com/",
         "https://pypi.org/user/kailash-sivagnanam/"
       ],
-      "knowsAbout": ["Python", "Exoplanets", "Astrobiology", "Planetary habitability", "Data science"]
+      "knowsAbout": ["Artificial intelligence", "Data science", "Python", "Astronomy", "Space technology", "Exoplanets", "Planetary habitability"]
     }
   }
   </script>
