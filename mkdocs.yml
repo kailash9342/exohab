@@ -126,3 +126,5 @@ extra:
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/exohab/
   social_card: assets/social-card.png
+  # Google Search Console ownership verification (keep, or verification is lost)
+  google_site_verification: uPbFlefcVRNwnnIyokzfPGSYXzHQOYpTOhbHiZKfWCw

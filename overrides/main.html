@@ -6,6 +6,9 @@
   {%- set page_desc = (page.meta.description if page and page.meta and page.meta.description else config.site_description) | striptags | trim -%}
   {%- set page_url = page.canonical_url if page and page.canonical_url else config.site_url -%}
   {%- set card = config.site_url ~ config.extra.social_card -%}
+  {%- if config.extra.google_site_verification %}
+  <meta name="google-site-verification" content="{{ config.extra.google_site_verification }}">
+  {%- endif %}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.site_name }}">
   <meta property="og:title" content="{{ page_title }}">
