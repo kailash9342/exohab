@@ -4,6 +4,21 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Documentation website at https://kailash9342.github.io/exohab/ (MkDocs
+  Material on GitHub Pages): user guide, science & methods with formulas and
+  validation, an API reference generated from docstrings, examples and
+  citation details. It's rebuilt and deployed automatically on every push to
+  `main`.
+- Zenodo DOI ([10.5281/zenodo.24269967](https://doi.org/10.5281/zenodo.24269967))
+  in the README and `CITATION.cff`.
+
+### Changed
+- PyPI "Homepage" and "Documentation" links point to the documentation
+  website (shown on PyPI from the next release).
+
 ## [0.2.0] - 2026-11-15
 
 ### Added
