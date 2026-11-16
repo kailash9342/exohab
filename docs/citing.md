@@ -10,6 +10,7 @@ If exohab helps your work, please cite it. Each release is archived on
 | DOI | Use it for |
 |---|---|
 | [10.5281/zenodo.24269967](https://doi.org/10.5281/zenodo.24269967) | The project as a whole (always resolves to the latest version) |
+| [10.5281/zenodo.24274348](https://doi.org/10.5281/zenodo.24274348) | Version 0.2.1 specifically |
 | [10.5281/zenodo.24269968](https://doi.org/10.5281/zenodo.24269968) | Version 0.2.0 specifically |
 
 ```bibtex
