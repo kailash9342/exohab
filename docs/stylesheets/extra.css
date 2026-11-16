@@ -10,6 +10,7 @@
 .exohab-hero h1 {
   margin: 0.4rem 0 0.2rem;
   font-weight: 700;
+  color: var(--md-default-fg-color);
   letter-spacing: -0.02em;
 }
 .exohab-hero .tagline {
