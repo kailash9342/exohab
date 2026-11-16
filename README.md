@@ -1,5 +1,10 @@
 # exohab
 
+[![CI](https://github.com/kailash9342/exohab/actions/workflows/ci.yml/badge.svg)](https://github.com/kailash9342/exohab/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/exohab.svg)](https://pypi.org/project/exohab/)
+[![Python](https://img.shields.io/pypi/pyversions/exohab.svg)](https://pypi.org/project/exohab/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kailash9342/exohab/blob/main/LICENSE)
+
 **How Earth-like is that exoplanet?** `exohab` is a small, well-tested Python
 toolkit for exploring that question with real data. It can:
 
@@ -105,9 +110,9 @@ df["cluster"] = model.fit_predict(df)
 
 More examples:
 
-- [`examples/quickstart.ipynb`](examples/quickstart.ipynb) is a runnable notebook walkthrough.
-- [`examples/full_tour.py`](examples/full_tour.py) is one script that runs and checks every public function.
-- [`examples/try_exohab.py`](examples/try_exohab.py) is a short check of your installation against published values.
+- [`examples/quickstart.ipynb`](https://github.com/kailash9342/exohab/blob/main/examples/quickstart.ipynb) is a runnable notebook walkthrough.
+- [`examples/full_tour.py`](https://github.com/kailash9342/exohab/blob/main/examples/full_tour.py) is one script that runs and checks every public function.
+- [`examples/try_exohab.py`](https://github.com/kailash9342/exohab/blob/main/examples/try_exohab.py) is a short check of your installation against published values.
 
 ## What is included
 
@@ -199,22 +204,23 @@ If `exohab` helps your work, please cite it:
 }
 ```
 
-The same metadata is in [`CITATION.cff`](CITATION.cff). GitHub reads that file
+The same metadata is in [`CITATION.cff`](https://github.com/kailash9342/exohab/blob/main/CITATION.cff). GitHub reads that file
 and shows a "Cite this repository" button. Please also cite the original
 papers of the metrics you use, listed above.
 
 ## Contributing and development
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kailash9342/exohab.git
 cd exohab
 pip install -e ".[dev,all]"
 pytest
 ```
 
 All tests run offline. Network calls to the NASA archive are mocked. Bug
-reports and suggestions are welcome as issues.
+reports and suggestions are welcome on the
+[issue tracker](https://github.com/kailash9342/exohab/issues).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/kailash9342/exohab/blob/main/LICENSE).

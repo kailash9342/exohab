@@ -8,7 +8,8 @@ license: MIT
 authors:
   - family-names: "Sivagnanam"
     given-names: "Kailash"
-repository-code: "https://github.com/your-name/exohab"
+repository-code: "https://github.com/kailash9342/exohab"
+url: "https://pypi.org/project/exohab/"
 keywords:
   - exoplanets
   - astrobiology

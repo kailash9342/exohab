@@ -43,8 +43,10 @@ all = ["matplotlib>=3.6", "scikit-learn>=1.2"]
 dev = ["pytest>=7.0", "build>=1.0", "twine>=4.0"]
 
 [project.urls]
-Homepage = "https://github.com/your-name/exohab"
-Issues = "https://github.com/your-name/exohab/issues"
+Homepage = "https://github.com/kailash9342/exohab"
+Source = "https://github.com/kailash9342/exohab"
+Issues = "https://github.com/kailash9342/exohab/issues"
+Changelog = "https://github.com/kailash9342/exohab/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/exohab"]
