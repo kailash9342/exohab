@@ -6,6 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kailash9342/exohab/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24269967.svg)](https://doi.org/10.5281/zenodo.24269967)
 
+📖 **Documentation: [kailash9342.github.io/exohab](https://kailash9342.github.io/exohab/)**
+
 **How Earth-like is that exoplanet?** `exohab` is a small, well-tested Python
 toolkit for exploring that question with real data. It can:
 

@@ -9,3 +9,5 @@ dist/
 htmlcov/
 examples/check_*.png
 exohab_tour_output/
+site/
+.claude/

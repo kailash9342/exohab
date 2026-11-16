@@ -41,9 +41,11 @@ viz = ["matplotlib>=3.6"]
 ml = ["scikit-learn>=1.2"]
 all = ["matplotlib>=3.6", "scikit-learn>=1.2"]
 dev = ["pytest>=7.0", "build>=1.0", "twine>=4.0"]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.26"]
 
 [project.urls]
-Homepage = "https://github.com/kailash9342/exohab"
+Homepage = "https://kailash9342.github.io/exohab/"
+Documentation = "https://kailash9342.github.io/exohab/"
 Source = "https://github.com/kailash9342/exohab"
 Issues = "https://github.com/kailash9342/exohab/issues"
 Changelog = "https://github.com/kailash9342/exohab/blob/main/CHANGELOG.md"

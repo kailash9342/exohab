@@ -85,6 +85,21 @@ def test_notebook_uses_real_api_and_is_valid():
     assert total >= 10
 
 
+DOCS = ROOT / "docs"
+
+
+@pytest.mark.skipif(not DOCS.exists(), reason="docs/ not present (sdist without docs)")
+def test_website_snippets_use_real_api():
+    pages = sorted(DOCS.rglob("*.md"))
+    assert len(pages) >= 10
+    total = 0
+    for page in pages:
+        blocks = re.findall(r"```python\n(.*?)```", page.read_text(encoding="utf-8"), flags=re.S)
+        for i, b in enumerate(blocks):
+            total += _check_source(b, f"{page.relative_to(ROOT)} block {i}")
+    assert total >= 40
+
+
 def test_checker_catches_mistakes():
     with pytest.raises(AssertionError, match="does not exist"):
         _check_source("eh.compute_esi_5p(1, 2)", "t")

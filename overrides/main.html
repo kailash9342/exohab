@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{#- SEO: canonical URL, Open Graph / Twitter cards and schema.org structured data -#}
+{% block extrahead %}
+  {%- set page_title = (page.title ~ " - " ~ config.site_name) if page and page.title and not page.is_homepage else (config.site_name ~ " - exoplanet habitability toolkit for Python") -%}
+  {%- set page_desc = (page.meta.description if page and page.meta and page.meta.description else config.site_description) | striptags | trim -%}
+  {%- set page_url = page.canonical_url if page and page.canonical_url else config.site_url -%}
+  {%- set card = config.site_url ~ config.extra.social_card -%}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ card }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exohab - exoplanet habitability toolkit for Python">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:image" content="{{ card }}">
+  {%- if page and page.is_homepage %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "exohab",
+    "description": {{ config.site_description | trim | tojson }},
+    "url": "{{ config.site_url }}",
+    "codeRepository": "https://github.com/kailash9342/exohab",
+    "programmingLanguage": "Python",
+    "license": "https://opensource.org/licenses/MIT",
+    "identifier": "https://doi.org/10.5281/zenodo.24269967",
+    "author": {"@type": "Person", "name": "Kailash Sivagnanam", "url": "https://github.com/kailash9342"},
+    "keywords": "exoplanets, astrobiology, habitability, Earth Similarity Index, habitable zone, NASA Exoplanet Archive, Monte Carlo, Python",
+    "runtimePlatform": "Python 3.10+"
+  }
+  </script>
+  {%- endif %}
+{% endblock %}
