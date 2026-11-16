@@ -37,4 +37,25 @@
   }
   </script>
   {%- endif %}
+  {%- if page and page.url == "about/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": "{{ page.canonical_url }}",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Kailash Sivagnanam",
+      "url": "https://github.com/kailash9342",
+      "image": "https://github.com/kailash9342.png",
+      "jobTitle": "Creator and maintainer of exohab",
+      "sameAs": [
+        "https://github.com/kailash9342",
+        "https://pypi.org/user/kailash-sivagnanam/"
+      ],
+      "knowsAbout": ["Python", "Exoplanets", "Astrobiology", "Planetary habitability", "Data science"]
+    }
+  }
+  </script>
+  {%- endif %}
 {% endblock %}

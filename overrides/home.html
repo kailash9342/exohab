@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+
+{#- Custom landing page: hero + stats strip rendered above the Markdown content -#}
+
+{% block extrahead %}
+  {{ super() }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "What is the Earth Similarity Index (ESI)?",
+       "acceptedAnswer": {"@type": "Answer", "text": "The Earth Similarity Index is a number from 0 to 1 that measures how similar a planet's radius, bulk density, escape velocity and surface temperature are to Earth's (Schulze-Makuch et al. 2011). A two-parameter version uses radius and stellar flux. It measures similarity, not the probability of life."}},
+      {"@type": "Question", "name": "Is exohab free?",
+       "acceptedAnswer": {"@type": "Answer", "text": "Yes. exohab is open source under the MIT license and can be used freely in research, teaching and commercial projects."}},
+      {"@type": "Question", "name": "Do I need an API key for NASA data?",
+       "acceptedAnswer": {"@type": "Answer", "text": "No. exohab loads the NASA Exoplanet Archive through its public TAP service, which needs no API key, and caches the data locally for offline use."}},
+      {"@type": "Question", "name": "How do I install exohab?",
+       "acceptedAnswer": {"@type": "Answer", "text": "Run pip install exohab, or pip install \"exohab[all]\" to include plotting and machine-learning features. Python 3.10 or newer is required."}},
+      {"@type": "Question", "name": "How can I cite exohab?",
+       "acceptedAnswer": {"@type": "Answer", "text": "Each release is archived on Zenodo with a DOI. Cite the project as 10.5281/zenodo.24269967, and also cite the original papers of the metrics you use."}}
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block tabs %}
+  {{ super() }}
+  <section class="hx-hero" aria-label="exohab introduction">
+    <div class="hx-stars" aria-hidden="true"></div>
+    <div class="hx-hero__inner">
+      <div class="hx-hero__text">
+        <p class="hx-eyebrow">Open-source &middot; Python 3.10+ &middot; MIT</p>
+        <h1 class="hx-title">How Earth-like is<br><span class="hx-gradient-text">that exoplanet?</span></h1>
+        <p class="hx-lead">
+          exohab computes published habitability metrics for every confirmed
+          exoplanet, using live NASA data, honest uncertainties and formulas
+          cited to the paper.
+        </p>
+        <div class="hx-cta">
+          <a href="{{ 'quickstart/' | url }}" class="md-button md-button--primary hx-btn">Get started</a>
+          <a href="https://github.com/kailash9342/exohab" class="md-button hx-btn hx-btn--ghost">
+            {% include ".icons/fontawesome/brands/github.svg" %} Star on GitHub
+          </a>
+        </div>
+        <div class="hx-install" role="group" aria-label="Install command">
+          <code id="hx-install-cmd">pip install "exohab[all]"</code>
+          <button type="button" class="hx-copy" aria-label="Copy install command"
+                  onclick="navigator.clipboard.writeText(document.getElementById('hx-install-cmd').textContent).then(()=>{this.classList.add('hx-copied');setTimeout(()=>this.classList.remove('hx-copied'),1500)})">
+            <span class="hx-copy__idle">Copy</span><span class="hx-copy__done">Copied</span>
+          </button>
+        </div>
+      </div>
+      <div class="hx-hero__art" aria-hidden="true">
+        <div class="hx-orbit">
+          <img src="{{ 'assets/logo.svg' | url }}" alt="" width="260" height="260">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hx-stats" aria-label="exohab in numbers">
+    <div class="hx-stats__inner">
+      <div><strong>6,000+</strong><span>confirmed planets, live from NASA</span></div>
+      <div><strong>100%</strong><span>of formulas cited to the literature</span></div>
+      <div><strong>100+</strong><span>automated tests on every change</span></div>
+      <div><strong>0</strong><span>API keys needed</span></div>
+      <div><strong>DOI</strong><span>citable via Zenodo</span></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <div class="hx-content">
+    {{ page.content }}
+  </div>
+{% endblock %}

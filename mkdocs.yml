@@ -64,6 +64,7 @@ nav:
   - API reference: api.md
   - Examples: examples.md
   - About:
+      - About & author: about.md
       - Citing exohab: citing.md
       - Changelog: changelog.md
 
