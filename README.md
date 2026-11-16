@@ -4,6 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/exohab.svg)](https://pypi.org/project/exohab/)
 [![Python](https://img.shields.io/pypi/pyversions/exohab.svg)](https://pypi.org/project/exohab/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kailash9342/exohab/blob/main/LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24269967.svg)](https://doi.org/10.5281/zenodo.24269967)
 
 **How Earth-like is that exoplanet?** `exohab` is a small, well-tested Python
 toolkit for exploring that question with real data. It can:
@@ -200,9 +201,16 @@ If `exohab` helps your work, please cite it:
   title   = {exohab: exoplanet habitability toolkit for Python},
   version = {0.2.0},
   year    = {2026},
+  doi     = {10.5281/zenodo.24269968},
+  url     = {https://doi.org/10.5281/zenodo.24269968},
   license = {MIT}
 }
 ```
+
+Each release is archived on Zenodo with its own DOI. The DOI above is for
+version 0.2.0. To cite the project as a whole, which always resolves to the
+latest version, use
+[10.5281/zenodo.24269967](https://doi.org/10.5281/zenodo.24269967).
 
 The same metadata is in [`CITATION.cff`](https://github.com/kailash9342/exohab/blob/main/CITATION.cff). GitHub reads that file
 and shows a "Cite this repository" button. Please also cite the original
