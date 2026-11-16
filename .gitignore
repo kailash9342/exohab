@@ -8,3 +8,4 @@ dist/
 .coverage
 htmlcov/
 examples/check_*.png
+exohab_tour_output/

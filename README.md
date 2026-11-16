@@ -103,7 +103,11 @@ model = make_pipeline(
 df["cluster"] = model.fit_predict(df)
 ```
 
-A runnable walkthrough is in [`examples/quickstart.ipynb`](examples/quickstart.ipynb).
+More examples:
+
+- [`examples/quickstart.ipynb`](examples/quickstart.ipynb) is a runnable notebook walkthrough.
+- [`examples/full_tour.py`](examples/full_tour.py) is one script that runs and checks every public function.
+- [`examples/try_exohab.py`](examples/try_exohab.py) is a short check of your installation against published values.
 
 ## What is included
 
