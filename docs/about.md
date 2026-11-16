@@ -82,7 +82,7 @@ metrics and uncertainty modelling to the NASA data pipeline, the tests and
 this website.
 
 <div class="hx-author-links" markdown>
-[:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/kailash-sivaganam-49a383315){ .md-button }
+[:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/kailash-sivagnanam-49a383315){ .md-button }
 [:fontawesome-brands-github: GitHub](https://github.com/kailash9342){ .md-button }
 [:material-web: hacroo.com](https://hacroo.com/){ .md-button }
 [:fontawesome-brands-python: PyPI](https://pypi.org/user/kailash-sivagnanam/){ .md-button }
