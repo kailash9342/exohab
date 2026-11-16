@@ -4,7 +4,10 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.2.1] - 2026-11-16
+
+No changes to the library code or results. This release updates the project
+metadata and documentation shown on PyPI.
 
 ### Added
 - Documentation website at https://kailash9342.github.io/exohab/ (MkDocs
@@ -17,7 +20,11 @@ All notable changes to this project are documented here. The format follows
 
 ### Changed
 - PyPI "Homepage" and "Documentation" links point to the documentation
-  website (shown on PyPI from the next release).
+  website.
+- README: documentation link, DOI badge, and a citation that uses the
+  all-versions DOI.
+- Release workflow: refuses to publish if the tag doesn't match the package
+  version; publishes to PyPI through trusted publishing (no API tokens).
 
 ## [0.2.0] - 2026-11-15
 

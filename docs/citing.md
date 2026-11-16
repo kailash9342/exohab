@@ -16,10 +16,10 @@ If exohab helps your work, please cite it. Each release is archived on
 @software{sivagnanam_exohab,
   author  = {Sivagnanam, Kailash},
   title   = {exohab: exoplanet habitability toolkit for Python},
-  version = {0.2.0},
+  version = {0.2.1},
   year    = {2026},
-  doi     = {10.5281/zenodo.24269968},
-  url     = {https://doi.org/10.5281/zenodo.24269968},
+  doi     = {10.5281/zenodo.24269967},
+  url     = {https://doi.org/10.5281/zenodo.24269967},
   license = {MIT}
 }
 ```

@@ -27,7 +27,7 @@ def raw(sample_csv):
 
 
 def test_version_matches_installed_metadata():
-    assert exohab.__version__ == "0.2.0" == version("exohab")
+    assert exohab.__version__ == version("exohab")
 
 
 # --------------------------------------------------------------------------- surface temp

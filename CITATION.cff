@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using these metadata, and cite the original papers of the metrics you use."
 title: "exohab: exoplanet habitability toolkit for Python"
 type: software
-version: 0.2.0
+version: 0.2.1
 date-released: 2026-11-16
 doi: 10.5281/zenodo.24269967
 identifiers:

@@ -34,7 +34,7 @@ from .uncertainty import (
     split_normal_cdf,
 )
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 _LAZY = {
     "HabitabilityFeatureTransformer": "ml",

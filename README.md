@@ -201,18 +201,18 @@ If `exohab` helps your work, please cite it:
 @software{sivagnanam_exohab,
   author  = {Sivagnanam, Kailash},
   title   = {exohab: exoplanet habitability toolkit for Python},
-  version = {0.2.0},
+  version = {0.2.1},
   year    = {2026},
-  doi     = {10.5281/zenodo.24269968},
-  url     = {https://doi.org/10.5281/zenodo.24269968},
+  doi     = {10.5281/zenodo.24269967},
+  url     = {https://doi.org/10.5281/zenodo.24269967},
   license = {MIT}
 }
 ```
 
-Each release is archived on Zenodo with its own DOI. The DOI above is for
-version 0.2.0. To cite the project as a whole, which always resolves to the
-latest version, use
-[10.5281/zenodo.24269967](https://doi.org/10.5281/zenodo.24269967).
+The DOI above always resolves to the latest version. Each release is also
+archived on [Zenodo](https://doi.org/10.5281/zenodo.24269967) with its own
+version-specific DOI, listed there; use that one if you need to cite the exact
+version you used.
 
 The same metadata is in [`CITATION.cff`](https://github.com/kailash9342/exohab/blob/main/CITATION.cff). GitHub reads that file
 and shows a "Cite this repository" button. Please also cite the original
